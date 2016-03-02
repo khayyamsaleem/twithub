@@ -9,8 +9,18 @@ app.use(bodyParser.json());
 
 app.post('/', (req, res) => {
     let event = req.headers['x-github-event'];
-    console.log(`got event ${event}`);
-    res.send('<h1>aids</h1>');
+    if (event == "issues") {
+        let project = req.body.repository.name;
+        let user = req.body.issue.user.login;
+        let title = req.body.issue.title;
+        let url = req.body.issue.url;
+        console.log(`${project}: ${user} created issue ${title}\n${url}`);
+    } else if (event == "issue_comment") {
+
+    } else {
+        console.log(`unknown github event: ${event}`);
+    }
+    res.send('ok');
 });
 
 app.listen(3000, () => {
