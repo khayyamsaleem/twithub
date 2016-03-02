@@ -8,19 +8,25 @@ const tweetAt = 'benwafflez';
 app.use(bodyParser.json());
 
 app.post('/', (req, res) => {
+    let data = req.body;
     let event = req.headers['x-github-event'];
-    if (event == "issues") {
-        let project = req.body.repository.name;
-        let action = req.body.action;
-        let user = req.body.sender.login;
-        let title = req.body.issue.title;
-        let url = req.body.issue.html_url;
-        console.log(`${project}: ${user} ${action} issue '${title}'\n${url}`);
-    } else if (event == "issue_comment") {
-
+    if (event) {
+        let project = data.repository.name;
+        let user = data.sender.login;
+        if (event == "issues") {
+            let action = data.action;
+            let title = data.issue.title;
+            let url = data.issue.html_url;
+            console.log(`${project}: ${user} ${action} issue '${title}'\n${url}`);
+        } else if (event == "issue_comment") {
+            let comment = data.comment.body;
+            let url = data.issue.html_url;
+            console.log(`${project}: ${user} commented on issue '${title}'\n${comment}\n${url}`);
+        }
     } else {
         console.log(`unknown github event: ${event}`);
     }
+    console.log('\n');
     res.send('ok');
 });
 
