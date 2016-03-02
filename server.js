@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const app = express();
 const twitter = require('./twit.js');
 
-const tweetAt = 'benwafflez';
+const githubToTwitter = {
+    'benwaffle': 'benwafflez',
+    'khayyamsaleem': 'KhayyamSaleem',
+};
 
 app.use(bodyParser.json());
 
@@ -18,12 +21,24 @@ app.post('/', (req, res) => {
             let action = data.action;
             let title = data.issue.title;
             let url = data.issue.html_url;
-            console.log(`${project}: ${user} ${action} issue '${title}'\n${url}`);
+            let twitterUser = githubToTwitter[user];
+            let tweet = `@${twitterUser} ${project}: ${user} ${action} issue '${title}'\n${url}`;
+            console.log(`Tweeting: ${tweet}`);
+            twitter.tweet(tweet, (err) => {
+                if (err)
+                    console.log(err);
+            });
         } else if (event == "issue_comment") {
             let title = data.issue.title;
             let url = data.issue.html_url;
             let comment = data.comment.body;
-            console.log(`${project}: ${user} commented on issue '${title}'\n${comment}\n${url}`);
+            let twitterUser = githubToTwitter[user];
+            let tweet = `@${twitterUser} ${project}: ${user} commented on issue '${title}'\n${comment}\n${url}`;
+            console.log(`Tweeting: ${tweet}`);
+            twitter.tweet(tweet, (err) => {
+                if (err)
+                    console.log(err);
+            });
         } else {
             console.log(`unknown github event: ${event}`);
         }

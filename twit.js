@@ -6,6 +6,7 @@ var client = new Twitter({
 	access_token_secret: 'IZ06WkLDpmCzvLXf6tTKVYl893xPIV39PK7wUCHovf8qc'
 });
 
+// callback: (error, tweet body, raw response object) => {}
 function tweet(status, callback) {
 	client.post('statuses/update', {status}, callback);
 }
