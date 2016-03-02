@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -7,7 +8,8 @@ const tweetAt = 'benwafflez';
 app.use(bodyParser.json());
 
 app.post('/', (req, res) => {
-    console.log(JSON.stringify(req.body));
+    let event = req.headers['x-github-event'];
+    console.log(`got event ${event}`);
     res.send('<h1>aids</h1>');
 });
 
