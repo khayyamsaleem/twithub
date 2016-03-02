@@ -19,8 +19,9 @@ app.post('/', (req, res) => {
             let url = data.issue.html_url;
             console.log(`${project}: ${user} ${action} issue '${title}'\n${url}`);
         } else if (event == "issue_comment") {
-            let comment = data.comment.body;
+            let title = data.issue.title;
             let url = data.issue.html_url;
+            let comment = data.comment.body;
             console.log(`${project}: ${user} commented on issue '${title}'\n${comment}\n${url}`);
         }
     } else {
