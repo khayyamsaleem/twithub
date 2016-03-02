@@ -12,7 +12,7 @@ app.post('/', (req, res) => {
     if (event == "issues") {
         let project = req.body.repository.name;
         let action = req.body.action;
-        let user = req.body.issue.user.login;
+        let user = req.body.sender.login;
         let title = req.body.issue.title;
         let url = req.body.issue.html_url;
         console.log(`${project}: ${user} ${action} issue '${title}'\n${url}`);
