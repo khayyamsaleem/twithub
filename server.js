@@ -11,10 +11,11 @@ app.post('/', (req, res) => {
     let event = req.headers['x-github-event'];
     if (event == "issues") {
         let project = req.body.repository.name;
+        let action = req.body.action;
         let user = req.body.issue.user.login;
         let title = req.body.issue.title;
         let url = req.body.issue.html_url;
-        console.log(`${project}: ${user} created issue ${title}\n${url}`);
+        console.log(`${project}: ${user} ${action} issue '${title}'\n${url}`);
     } else if (event == "issue_comment") {
 
     } else {
