@@ -23,9 +23,11 @@ app.post('/', (req, res) => {
             let url = data.issue.html_url;
             let comment = data.comment.body;
             console.log(`${project}: ${user} commented on issue '${title}'\n${comment}\n${url}`);
+        } else {
+            console.log(`unknown github event: ${event}`);
         }
     } else {
-        console.log(`unknown github event: ${event}`);
+        console.log("Post request without github event");
     }
     console.log('\n');
     res.send('ok');
