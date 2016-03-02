@@ -13,7 +13,7 @@ app.post('/', (req, res) => {
         let project = req.body.repository.name;
         let user = req.body.issue.user.login;
         let title = req.body.issue.title;
-        let url = req.body.issue.url;
+        let url = req.body.issue.html_url;
         console.log(`${project}: ${user} created issue ${title}\n${url}`);
     } else if (event == "issue_comment") {
 
