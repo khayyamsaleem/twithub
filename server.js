@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
+const tweetAt = 'benwafflez';
+
 app.use(bodyParser.json());
 
 app.post('/', (req, res) => {
