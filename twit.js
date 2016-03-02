@@ -1,10 +1,9 @@
-const Twitter = require('twitter');
-
+var Twitter = require('twitter');
 var client = new Twitter({
-	consumer_key: 'G61bMjUHHxLrHzTnrCSfxI4IeOLtOSFXJUBM51xKDmJ5rlDAL8', 
-	consumer_secret: 'G61bMjUHHxLrHzTnrCSfxI4IeOLtOSFXJUBM51xKDmJ5rlDAL8',
-	access_token_key: '704876576337477636-y1ABqx4EJN2laossezoedWlSKjs6NHx', 
-	access_token_secret: 'nils8jhtwyD5jQtP4DOLAVRLP9QrnZjfxB0VWdfGLx3Dy'
+	consumer_key: 'j5oWVtmbD3MnrGtRk0jMOEI4z', 
+	consumer_secret: 'VfoxZbtrTjeSPVOkuzsmjUB8c6TmIHKsZIZr83MSo0CpN1x72F',
+	access_token_key: '704876576337477636-9wsUP6ZuWHsbpHhnSyiOQIkoxd5OalJ', 
+	access_token_secret: 'IZ06WkLDpmCzvLXf6tTKVYl893xPIV39PK7wUCHovf8qc'
 });
 
 var params = {screen_name: 'TwithubB'};
@@ -20,4 +19,8 @@ client.post('statuses/update', {status: "Ben's a dick"}, function(error, tweet, 
 	console.log(response);
 });
 
-
+client.post('statuses/update', {in_reply_to_status_id: "@benwafflez Ben is a dick"}, function(error, tweet, response){
+	if(error) console.log(error);
+	console.log(tweet)
+	console.log(response);
+});
